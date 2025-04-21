@@ -20,8 +20,6 @@
 
 查看檔案內容 | cat 檔案名 / less 檔案名 / head / tail | 一次看完 / 分頁 / 看前幾行 / 看後幾行
 
-功能 | 指令語句 | 說明
-
 複製檔案或資料夾 | cp 檔案A 檔案B / cp -r 資料夾A 資料夾B | -r 表示遞迴處理資料夾
 
 移動/重新命名 | mv 原名 新名 | 可用來移動檔案或重新命名
@@ -31,8 +29,6 @@
 搜尋檔案 | find /路徑 -name 檔案名 | 例如 find . -name "*.log"
 
 搜尋內容 | grep "關鍵字" 檔案名 / grep -r "關鍵字" 資料夾名 | 搜尋文字內容
-
-功能 | 指令語句 | 說明
 
 查看目前使用者 | whoami | 顯示目前登入的使用者
 
@@ -47,8 +43,6 @@
 查看目前執行程序 | ps aux / top | 顯示所有執行中程序
 
 關閉程序 | kill PID / kill -9 PID | 強制關閉指定程序
-
-功能 | 指令語句 | 說明
 
 查看 IP | ip a / ifconfig（有些系統需安裝） | 查看目前網路 IP
 
@@ -71,7 +65,11 @@ sudo yum install xxx      # 舊版系統
 sudo dnf install xxx      # 新版系統
 
 功能 | 指令語句
+
 壓縮 tar | tar -czvf 檔案名.tar.gz 資料夾/
+
 解壓 tar | tar -xzvf 檔案名.tar.gz
+
 壓縮 zip | zip -r 檔案名.zip 資料夾/
+
 解壓 zip | unzip 檔案名.zip
