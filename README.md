@@ -1,117 +1,89 @@
-# 資料工程師日常常用 Linux 指令包
+# 📂 檔案與資料夾操作
 
-# 查看前 10 筆資料
- 
-head -n 10 data.csv    
+| 功能             | 指令                              
 
-# 查看最後 10 筆資料
+| 建立資料夾（可巢狀）     | `mkdir -p /data/input`    
 
-tail -n 10 data.csv   
+| 複製所有 CSV 檔     | `cp /source/*.csv /data/input/` 
 
-# 計算資料筆數（行數）
+| 移動或重新命名檔案      | `mv old_data.csv backup/`  
 
-wc -l data.csv 
+| 刪除所有 `.tmp` 檔案 | `rm *.tmp`   
 
-# 美化顯示 JSON（需安裝 jq）
+| 尋找所有 CSV 檔     | `find . -name "*.csv"` 
 
-cat data.json | jq '.'  
+| 改變檔案擁有者        | `chown user:group file.txt`  
 
-# 尋找 log 中出現 error 的行
+| 設定資料夾權限（執行與讀寫） | `chmod 755 my_folder` 
 
-grep "error" log.txt      
+| 給予檔案執行權限       | `chmod +x script.sh`   
 
-# 建立資料夾（可巢狀）
+# 📄 資料處理與檢視
 
-mkdir -p /data/input 
+| 功能                    | 指令                                   
 
-# 複製全部 CSV 檔到目標資料夾
+| 查看前 10 筆資料            | `head -n 10 data.csv`   
 
-cp /source/*.csv /data/input/   
+| 查看最後 10 筆資料           | `tail -n 10 data.csv`    
 
-# 移動或重新命名
+| 計算筆數（行數）              | `wc -l data.csv`    
 
-mv old_data.csv backup/  
+| 美化顯示 JSON（需安裝 jq）     | `cat data.json \| jq '.'`  
 
-# 刪除所有 .tmp 臨時檔案
+| 搜尋 log 中包含 "error" 的行 | `grep "error" log.txt`   
 
-rm *.tmp     
+| 只取第 1 與第 3 欄          | `cut -d',' -f1,3 data.csv > new.csv` 
 
-# 尋找所有 CSV 檔
+| 第 3 欄數值大於 50 的資料      | `awk -F',' '$3 > 50' data.csv` 
 
-find . -name "*.csv"   
+# 📦 壓縮與備份
 
-# 備份整個 /data 資料夾
+| 功能                  | 指令                                              
 
-tar -czvf backup_$(date +%Y%m%d).tar.gz /data 
+| 備份整個 `/data` 資料夾    | `tar -czvf backup_$(date +%Y%m%d).tar.gz /data` 
 
-# 解壓縮 ZIP
+| 解壓縮 ZIP             | `unzip dataset.zip`    
 
-unzip dataset.zip         
+| 使用 7z 壓縮（需安裝 p7zip） | `7z a archive.7z /data/*`  
 
- # 使用 7zip 壓縮（需安裝 p7zip）
+# 🐍 Python 與虛擬環境
 
-7z a archive.7z /data/*    
+| 功能           | 指令                         
 
-# 查看 Python 版本
+| 查看 Python 版本 | `python3 -V`     
 
-python3 -V   
+| 執行 Python 腳本 | `python3 script.py`     
 
-# 執行 Python 腳本
+| 安裝套件         | `pip install pandas`   
 
-python3 script.py 
+| 列出已安裝套件      | `pip list`    
 
- # 安裝套件
+| 建立虛擬環境       | `python3 -m venv venv`    
 
-pip install pandas      
+| 啟用虛擬環境       | `source venv/bin/activate` 
 
-# 列出已安裝的套件
+| 停用虛擬環境       | `deactivate`    
 
-pip list                 
+# 🌐 遠端與同步
 
-python3 -m venv venv
+| 功能       | 指令                                      
 
-source venv/bin/activate
+| 傳送檔案到遠端  | `scp file.csv user@remote:/home/user/` 
 
-deactivate
+| 備份/同步資料夾 | `rsync -avz data/ user@server:/backup/` 
 
-# 傳檔案到遠端
+# ☁️ GCP 相關
 
-scp file.csv user@remote:/home/user/ 
+| 功能         | 指令                                     
 
-# 備份/同步資料夾
+| 登入 GCP CLI | `gcloud auth login`   
 
-rsync -avz data/ user@server:/backup/  
+| 上傳檔案至 GCS  | `gsutil cp data.csv gs://your-bucket/` 
 
-# 登入 GCP CLI
+# 🕒 排程任務（crontab）
 
-gcloud auth login                    
+| 功能             | 指令                                                                   
 
-# 上傳到 GCS（Google Cloud Storage）
- 
-gsutil cp data.csv gs://your-bucket/）
+| 編輯排程任務         | `crontab -e`                                                         
 
-# 編輯排程任務
-
-crontab -e             
-
-0 2 * * * /home/user/mongo_backup.sh >> /home/user/backup.log 2>&1
-
-# 給予可執行權限
-
-chmod +x script.sh    
-
-# 設定資料夾執行與讀寫權限
-
-chmod 755 my_folder   
-
-# 改變檔案擁有者 
-
-chown user:group file.txt    
-
-# 只取第1與第3欄
-
-cut -d',' -f1,3 data.csv > new.csv  
-
-# 第3欄數字大於 50 的資料
-
-awk -F',' '$3 > 50' data.csv       
+| 每天凌晨 2 點執行備份腳本 | `0 2 * * * /home/user/mongo_backup.sh >> /home/user/backup.log 2>&1` 
