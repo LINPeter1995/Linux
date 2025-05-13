@@ -80,7 +80,7 @@
 
 | 上傳檔案至 GCS  | `gsutil cp data.csv gs://your-bucket/` 
 
-# 排程任務（crontab）
+# 排程任務
 
 | 功能             | 指令                                                                   
 
